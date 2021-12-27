@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * @author Riza Nansuri
- * @version $Id: InvitationTest.java, v 0.1 2021‐12‐27 11.54 Riza Nansuri Exp $$
+ * @version $Id: InvitationTestCase.java, v 0.1 2021‐12‐27 11.54 Riza Nansuri Exp $$
  */
 public class InvitationTest {
 
