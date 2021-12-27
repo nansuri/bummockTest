@@ -1,5 +1,6 @@
 package TestCase.Invitation;
 
+import TestHelper.CommonHelper;
 import TestLogic.InvitationTestLogic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -18,6 +19,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 public class InvitationTest {
 
     InvitationTestLogic invitationTestLogic = new InvitationTestLogic();
+    CommonHelper commonHelper = new CommonHelper();
 
     @BeforeAll
     public static void setup() {
@@ -31,7 +33,7 @@ public class InvitationTest {
 
         // 1. Do Submit new wishes
         Response response = invitationTestLogic.submitWishesTest("TEST0001", candidate);
-        Assertions.assertEquals(200, response.statusCode());
+        commonHelper.responseCodeAssertion(response);
         Assertions.assertEquals("true", response.jsonPath().getString("success"));
     }
 
@@ -43,12 +45,12 @@ public class InvitationTest {
 
         // 1. Do Submit new wishes
         Response response = invitationTestLogic.submitWishesTest(invitationId,"TEST");
-        Assertions.assertEquals(200, response.statusCode());
+        commonHelper.responseCodeAssertion(response);
         Assertions.assertEquals("true", response.jsonPath().getString("success"));
 
         // 2. Do Query the wishes
         Response queryResponse = invitationTestLogic.queryWishesTest(invitationId);
-        Assertions.assertEquals(200, queryResponse.statusCode());
+        commonHelper.responseCodeAssertion(response);
         Assertions.assertEquals("true", queryResponse.jsonPath().getString("success"));
     }
 }
