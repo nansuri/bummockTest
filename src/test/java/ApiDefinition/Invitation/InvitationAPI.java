@@ -1,9 +1,11 @@
 package ApiDefinition.Invitation;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.restassured.response.Response;
 
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static io.restassured.RestAssured.given;
 
@@ -16,13 +18,16 @@ public class InvitationAPI {
     private String INVITATION_SUBMIT_WISHES = "/invitation/wishes/submit";
     private String INVITATION_QUERY_WISHES = "/invitation/wishes/query";
 
+    Logger logger = Logger.getLogger(InvitationAPI.class.getName());
+
+
     /**
      * /invitation/wishes/submit API
      * @return
      */
     public Response submitWishesAPI(JSONObject request){
 
-        System.out.println("Request: \n" + request);
+        logger.info("Request: \n" + JSON.toJSONString(request, true));
 
         Response response = given()
                 .header("Content-type", "application/json")
@@ -34,7 +39,7 @@ public class InvitationAPI {
                 .then()
                 .extract().response();
 
-        System.out.println("Response: \n" + response.body().prettyPrint());
+        logger.info("Response: \n" + response.body().prettyPrint());
 
         return response;
     }
@@ -45,7 +50,7 @@ public class InvitationAPI {
      */
     public Response queryWishesAPI(Map<String,String> queryParam){
 
-        System.out.println("Request: \n" + queryParam.toString());
+        logger.info("Request: \n" + JSON.toJSONString(queryParam.toString(), true));
 
         Response response = given()
                 .header("Content-type", "application/json")
@@ -57,7 +62,7 @@ public class InvitationAPI {
                 .then()
                 .extract().response();
 
-        System.out.println("Response: \n" + response.body().prettyPrint());
+        logger.info("Response: \n" + response.body().prettyPrint());
 
         return response;
     }

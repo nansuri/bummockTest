@@ -38,10 +38,10 @@ public class InvitationTestLogic {
      * @return
      */
 
-    public Response queryWishesTest(String invitationId){
+    public Response queryWishesTest(String messageId){
         Map<String, String> queryParam = new HashMap<>();
-        queryParam.put("invitationid",invitationId);
         queryParam.put("size","10");
+        queryParam.put("messageid",messageId);
 
         return invitationAPI.queryWishesAPI(queryParam);
     }

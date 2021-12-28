@@ -20,4 +20,12 @@ public class CommonHelper {
     public void responseCodeAssertion(Response response){
         Assertions.assertEquals(200, response.statusCode());
     }
+
+    /**
+     * responseValuePicker
+     * @param response
+     */
+    public String responseValuePicker(Response response, String value){
+        return response.jsonPath().getString(value);
+    }
 }

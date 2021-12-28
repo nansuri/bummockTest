@@ -4,6 +4,7 @@ import TestHelper.CommonHelper;
 import TestLogic.InvitationTestLogic;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -26,13 +27,15 @@ public class InvitationTestCase {
         RestAssured.baseURI = "https://rumahundangan.tunnelto.dev/apis";
     }
 
-    @DisplayName("Verify submit wishes is working well")
+    @DisplayName("Verify submit wishes with parameterized message")
     @ParameterizedTest
-    @ValueSource(strings = { "ini satu", "ini dua"})
+    @ValueSource(strings = { "test value normal", "", "@!#&*(@!"})
     public void submitWishesTestCase(String candidate){
 
         // 1. Do Submit new wishes
         Response response = invitationTestLogic.submitWishesTest("TEST0001", candidate);
+
+        // Assert
         commonHelper.responseCodeAssertion(response);
         Assertions.assertEquals("true", response.jsonPath().getString("success"));
     }
@@ -44,13 +47,20 @@ public class InvitationTestCase {
         String invitationId = "TEST_FRAMEWORK";
 
         // 1. Do Submit new wishes
-        Response response = invitationTestLogic.submitWishesTest(invitationId,"TEST");
-        commonHelper.responseCodeAssertion(response);
-        Assertions.assertEquals("true", response.jsonPath().getString("success"));
+        Response submitResponse = invitationTestLogic.submitWishesTest(invitationId,"THIS IS A TEST");
+        commonHelper.responseCodeAssertion(submitResponse);
+        Assertions.assertEquals("true", submitResponse.jsonPath().getString("success"));
+
+        // 1A. Get the messageId value
+        String messageId = commonHelper.responseValuePicker(submitResponse,"messageId");
 
         // 2. Do Query the wishes
-        Response queryResponse = invitationTestLogic.queryWishesTest(invitationId);
-        commonHelper.responseCodeAssertion(response);
+        Response queryResponse = invitationTestLogic.queryWishesTest(messageId);
+
+        // Assert
+        commonHelper.responseCodeAssertion(queryResponse);
         Assertions.assertEquals("true", queryResponse.jsonPath().getString("success"));
+        Assertions.assertEquals(messageId, queryResponse.jsonPath().getString("messages[0].messageId"));
+        Assertions.assertEquals("THIS IS A TEST", queryResponse.jsonPath().getString("messages[0].message"));
     }
 }
