@@ -1,5 +1,6 @@
 package TestCase.Invitation;
 
+import Core.CoreFunction;
 import TestHelper.CommonHelper;
 import TestLogic.InvitationTestLogic;
 import io.restassured.RestAssured;
@@ -19,12 +20,14 @@ import org.junit.jupiter.params.provider.ValueSource;
  */
 public class InvitationTestCase {
 
+    public static CoreFunction coreFunction = new CoreFunction();
+
     InvitationTestLogic invitationTestLogic = new InvitationTestLogic();
     CommonHelper commonHelper = new CommonHelper();
 
     @BeforeAll
     public static void setup() {
-        RestAssured.baseURI = "https://rumahundangan.tunnelto.dev/apis";
+        coreFunction.initConfig();
     }
 
     @DisplayName("Verify submit wishes with parameterized message")

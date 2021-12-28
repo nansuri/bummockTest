@@ -34,7 +34,7 @@ public class InvitationTestLogic {
 
     /**
      * queryWishesTest
-     * @param invitationId
+     * @param queryWishesTest
      * @return
      */
 
