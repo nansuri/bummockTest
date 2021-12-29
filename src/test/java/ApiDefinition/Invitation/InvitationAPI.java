@@ -31,7 +31,7 @@ public class InvitationAPI {
 
         Response response = given()
                 .header("Content-type", "application/json")
-                .header("Authorization", "Bearer SLD6MIilZ9zEN3LOMGaoF4e9pXyiu")
+                .header("Authorization", "")
                 .and()
                 .body(request.toJSONString())
                 .when()
@@ -54,7 +54,7 @@ public class InvitationAPI {
 
         Response response = given()
                 .header("Content-type", "application/json")
-                .header("Authorization", "Bearer SLD6MIilZ9zEN3LOMGaoF4e9pXyiu")
+                .header("Authorization", "")
                 .and()
                 .queryParams(queryParam)
                 .when()
