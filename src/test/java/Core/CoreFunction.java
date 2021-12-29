@@ -1,7 +1,3 @@
-/**
- * Dana.id.
- * Copyright (c) 2018‐2021 All Rights Reserved.
- */
 package Core;
 
 import io.restassured.RestAssured;

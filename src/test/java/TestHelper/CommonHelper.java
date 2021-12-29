@@ -1,7 +1,3 @@
-/**
- * Dana.id.
- * Copyright (c) 2018‐2021 All Rights Reserved.
- */
 package TestHelper;
 
 import io.restassured.response.Response;
