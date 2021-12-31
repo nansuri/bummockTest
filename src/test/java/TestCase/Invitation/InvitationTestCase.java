@@ -41,6 +41,21 @@ public class InvitationTestCase {
         // Assert
         commonHelper.responseCodeAssertion(response);
         Assertions.assertEquals("true", response.jsonPath().getString("success"));
+        Assertions.assertNotEquals("", response.jsonPath().getString("messageId"));
+    }
+
+    @DisplayName("Verify submit attend with parameterized message")
+    @ParameterizedTest
+    @ValueSource(strings = { "test value normal", "", "@!#&*(@!"})
+    public void submitAttendTestCase(String candidate){
+
+        // 1. Do Submit new wishes
+        Response response = invitationTestLogic.submitAttendTest("TEST0001", candidate);
+
+        // Assert
+        commonHelper.responseCodeAssertion(response);
+        Assertions.assertEquals("true", response.jsonPath().getString("success"));
+        Assertions.assertNotEquals("", response.jsonPath().getString("attendeeId"));
     }
 
     @DisplayName("Verify submit wishes then query the result")

@@ -15,7 +15,7 @@ import static io.restassured.RestAssured.given;
  */
 public class InvitationAPI {
 
-    private String INVITATION_SUBMIT_WISHES = "/invitation/wishes/submit";
+    private String INVITATION_SUBMIT_WISHES = "/invitation/submit";
     private String INVITATION_QUERY_WISHES = "/invitation/wishes/query";
 
     Logger logger = Logger.getLogger(InvitationAPI.class.getName());
@@ -31,7 +31,7 @@ public class InvitationAPI {
 
         Response response = given()
                 .header("Content-type", "application/json")
-                .header("Authorization", "")
+                .header("Authorization", "Bearer SLD6MIilZ9zEN3LOMGaoF4e9pXyiu")
                 .and()
                 .body(request.toJSONString())
                 .when()
@@ -54,7 +54,7 @@ public class InvitationAPI {
 
         Response response = given()
                 .header("Content-type", "application/json")
-                .header("Authorization", "")
+                .header("Authorization", "Bearer SLD6MIilZ9zEN3LOMGaoF4e9pXyiu")
                 .and()
                 .queryParams(queryParam)
                 .when()

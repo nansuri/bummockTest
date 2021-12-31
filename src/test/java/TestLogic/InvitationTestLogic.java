@@ -27,7 +27,24 @@ public class InvitationTestLogic {
         request.put("fullName", "TestMe");
         request.put("phoneNumber", "08777222772");
         request.put("message", message);
-        request.put("attend", "true");
+        request.put("attend", true);
+
+        return invitationAPI.submitWishesAPI(request);
+    }
+
+    /**
+     * submitAttendTest
+     * @param message
+     * @return
+     */
+
+    public Response submitAttendTest(String invitationId, String message){
+        JSONObject request = new JSONObject();
+        request.put("invitationId", invitationId);
+        request.put("fullName", "TestMe");
+        request.put("phoneNumber", "08777222772");
+        request.put("attend", true);
+        request.put("isAttendee", true);
 
         return invitationAPI.submitWishesAPI(request);
     }
