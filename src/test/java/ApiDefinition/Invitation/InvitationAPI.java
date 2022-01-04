@@ -1,5 +1,6 @@
 package ApiDefinition.Invitation;
 
+import Core.CoreContext;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.restassured.response.Response;
@@ -25,13 +26,14 @@ public class InvitationAPI {
      * /invitation/wishes/submit API
      * @return
      */
-    public Response submitWishesAPI(JSONObject request){
+    public Response submitWishesAPI(CoreContext coreContext, JSONObject request){
 
         logger.info("Request: \n" + JSON.toJSONString(request, true));
+        String accessToken = (String) coreContext.getAttribute("accessToken");
 
         Response response = given()
                 .header("Content-type", "application/json")
-                .header("Authorization", "Bearer SLD6MIilZ9zEN3LOMGaoF4e9pXyiu")
+                .header("Authorization", "Bearer " + accessToken)
                 .and()
                 .body(request.toJSONString())
                 .when()
@@ -48,13 +50,14 @@ public class InvitationAPI {
      * /invitation/wishes/query API
      * @return
      */
-    public Response queryWishesAPI(Map<String,String> queryParam){
+    public Response queryWishesAPI(CoreContext coreContext, Map<String,String> queryParam){
 
         logger.info("Request: \n" + JSON.toJSONString(queryParam.toString(), true));
+        String accessToken = (String) coreContext.getAttribute("accessToken");
 
         Response response = given()
                 .header("Content-type", "application/json")
-                .header("Authorization", "Bearer SLD6MIilZ9zEN3LOMGaoF4e9pXyiu")
+                .header("Authorization", "Bearer " + accessToken)
                 .and()
                 .queryParams(queryParam)
                 .when()

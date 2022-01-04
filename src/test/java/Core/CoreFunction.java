@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -13,14 +14,16 @@ import java.util.Properties;
  */
 public class CoreFunction {
 
-    public void initConfig(){
+    public void initConfig(CoreContext coreContext){
         try (InputStream input = new FileInputStream("src/test/resources/config.properties")) {
 
-            Properties prop = new Properties();
+            Properties props = new Properties();
 
             // load a properties file
-            prop.load(input);
-            RestAssured.baseURI = prop.getProperty("gateway_url");
+            props.load(input);
+            RestAssured.baseURI = props.getProperty("gateway_url");
+            coreContext.setAttribute("email", props.getProperty("email"));
+            coreContext.setAttribute("password", props.getProperty("password"));
 
         } catch (IOException ex) {
             ex.printStackTrace();

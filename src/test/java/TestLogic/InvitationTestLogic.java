@@ -1,6 +1,7 @@
 package TestLogic;
 
 import ApiDefinition.Invitation.InvitationAPI;
+import Core.CoreContext;
 import com.alibaba.fastjson.JSONObject;
 import io.restassured.response.Response;
 
@@ -21,7 +22,7 @@ public class InvitationTestLogic {
      * @return
      */
 
-    public Response submitWishesTest(String invitationId, String message){
+    public Response submitWishesTest(CoreContext coreContext, String invitationId, String message){
         JSONObject request = new JSONObject();
         request.put("invitationId", invitationId);
         request.put("fullName", "TestMe");
@@ -29,7 +30,7 @@ public class InvitationTestLogic {
         request.put("message", message);
         request.put("attend", true);
 
-        return invitationAPI.submitWishesAPI(request);
+        return invitationAPI.submitWishesAPI(coreContext, request);
     }
 
     /**
@@ -38,7 +39,7 @@ public class InvitationTestLogic {
      * @return
      */
 
-    public Response submitAttendTest(String invitationId, String message){
+    public Response submitAttendTest(CoreContext coreContext, String invitationId, String message){
         JSONObject request = new JSONObject();
         request.put("invitationId", invitationId);
         request.put("fullName", "TestMe");
@@ -46,7 +47,7 @@ public class InvitationTestLogic {
         request.put("attend", true);
         request.put("isAttendee", true);
 
-        return invitationAPI.submitWishesAPI(request);
+        return invitationAPI.submitWishesAPI(coreContext, request);
     }
 
     /**
@@ -55,11 +56,11 @@ public class InvitationTestLogic {
      * @return
      */
 
-    public Response queryWishesTest(String messageId){
+    public Response queryWishesTest(CoreContext coreContext, String messageId){
         Map<String, String> queryParam = new HashMap<>();
         queryParam.put("size","10");
         queryParam.put("messageid",messageId);
 
-        return invitationAPI.queryWishesAPI(queryParam);
+        return invitationAPI.queryWishesAPI(coreContext, queryParam);
     }
 }

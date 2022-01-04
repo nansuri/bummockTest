@@ -13,8 +13,8 @@ public class CommonHelper {
      * responseCodeAssertion
      * @param response
      */
-    public void responseCodeAssertion(Response response){
-        Assertions.assertEquals(200, response.statusCode());
+    public void responseCodeAssertion(Response response, int responseCode){
+        Assertions.assertEquals(responseCode, response.statusCode());
     }
 
     /**
