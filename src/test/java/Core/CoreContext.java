@@ -1,7 +1,3 @@
-/**
- * Dana.id.
- * Copyright (c) 2018‐2022 All Rights Reserved.
- */
 package Core;
 
 import java.util.HashMap;
